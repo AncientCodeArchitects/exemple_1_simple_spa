@@ -103,8 +103,60 @@
 
   <!-- ═══ SHELL SPA — Header / Content / Footer ═══ -->
   <div id="app" class="flex flex-col min-h-screen">
-    <!-- Header injecté par JS -->
-    <div id="app-header"></div>
+    <!-- Header -->
+    <header class="sticky top-0 z-50 bg-white/95 backdrop-blur supports-[backdrop-filter]:bg-white/80 border-b border-gray-200">
+      <nav class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8" aria-label="Navigation principale">
+        <div class="flex items-center justify-between h-16 md:h-20">
+
+          <!-- Logo / Branding -->
+          <a href="#/" class="flex items-center gap-2 text-gray-900 font-bold text-xl md:text-2xl tracking-tight"
+             aria-label="Retour à l'accueil">
+            <span aria-hidden="true" class="text-indigo-600 text-2xl md:text-3xl">&#9670;</span>
+            <span>MonSite</span>
+          </a>
+
+          <!-- Navigation Desktop -->
+          <ul class="hidden md:flex items-center gap-1 lg:gap-2" role="menubar">
+            <li role="none">
+              <a href="#/" role="menuitem" class="nav-link px-3 py-2 rounded-lg text-base font-medium text-gray-600 hover:text-indigo-600 hover:bg-indigo-50 transition-colors" data-path="/">Accueil</a>
+            </li>
+            <li role="none">
+              <a href="#/a-propos" role="menuitem" class="nav-link px-3 py-2 rounded-lg text-base font-medium text-gray-600 hover:text-indigo-600 hover:bg-indigo-50 transition-colors" data-path="/a-propos">À propos</a>
+            </li>
+            <li role="none">
+              <a href="#/services" role="menuitem" class="nav-link px-3 py-2 rounded-lg text-base font-medium text-gray-600 hover:text-indigo-600 hover:bg-indigo-50 transition-colors" data-path="/services">Services</a>
+            </li>
+            <li role="none">
+              <a href="#/contact" role="menuitem" class="nav-link px-3 py-2 rounded-lg text-base font-medium text-gray-600 hover:text-indigo-600 hover:bg-indigo-50 transition-colors" data-path="/contact">Contact</a>
+            </li>
+          </ul>
+
+          <!-- Bouton Burger -->
+          <button id="burger-btn" type="button"
+                  class="md:hidden relative w-11 h-11 flex items-center justify-center rounded-lg text-gray-600 hover:bg-gray-100 focus:outline-none focus-visible:ring-2 focus-visible:ring-indigo-500"
+                  aria-expanded="false" aria-controls="mobile-menu" aria-label="Ouvrir le menu">
+            <span class="burger-icon block w-6 h-5 relative">
+              <span class="burger-line absolute left-0 w-full h-0.5 bg-current rounded transition-all duration-300 top-0"></span>
+              <span class="burger-line absolute left-0 w-full h-0.5 bg-current rounded transition-all duration-300 top-1/2 -translate-y-1/2"></span>
+              <span class="burger-line absolute left-0 w-full h-0.5 bg-current rounded transition-all duration-300 bottom-0"></span>
+            </span>
+          </button>
+        </div>
+      </nav>
+
+      <!-- Menu Mobile (overlay) -->
+      <div id="mobile-menu" class="mobile-menu md:hidden fixed inset-0 top-16 z-40 invisible opacity-0 transition-all duration-300" aria-hidden="true">
+        <div class="mobile-menu-backdrop absolute inset-0 bg-black/20 backdrop-blur-sm"></div>
+        <div class="mobile-menu-panel relative bg-white border-t border-gray-200 shadow-xl mx-4 mt-2 rounded-2xl overflow-hidden transform translate-y-[-8px] transition-transform duration-300">
+          <ul class="flex flex-col py-3" role="menu">
+            <li role="none"><a href="#/" role="menuitem" class="mobile-nav-link flex items-center px-6 py-3.5 text-base font-medium text-gray-700 hover:text-indigo-600 hover:bg-indigo-50 transition-colors" data-path="/">Accueil</a></li>
+            <li role="none"><a href="#/a-propos" role="menuitem" class="mobile-nav-link flex items-center px-6 py-3.5 text-base font-medium text-gray-700 hover:text-indigo-600 hover:bg-indigo-50 transition-colors" data-path="/a-propos">À propos</a></li>
+            <li role="none"><a href="#/services" role="menuitem" class="mobile-nav-link flex items-center px-6 py-3.5 text-base font-medium text-gray-700 hover:text-indigo-600 hover:bg-indigo-50 transition-colors" data-path="/services">Services</a></li>
+            <li role="none"><a href="#/contact" role="menuitem" class="mobile-nav-link flex items-center px-6 py-3.5 text-base font-medium text-gray-700 hover:text-indigo-600 hover:bg-indigo-50 transition-colors" data-path="/contact">Contact</a></li>
+          </ul>
+        </div>
+      </div>
+    </header>
 
     <!-- Contenu principal — outlet du router -->
     <div id="app-content" class="flex-1" role="main">
@@ -114,8 +166,61 @@
       </div>
     </div>
 
-    <!-- Footer injecté par JS -->
-    <div id="app-footer"></div>
+    <!-- Footer -->
+    <footer class="bg-gray-900 text-gray-300">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8 py-12 lg:py-16">
+
+          <!-- Branding -->
+          <div class="sm:col-span-2 lg:col-span-1">
+            <a href="#/" class="inline-flex items-center gap-2 text-white font-bold text-xl">
+              <span aria-hidden="true" class="text-indigo-400 text-2xl">&#9670;</span>
+              <span>MonSite</span>
+            </a>
+            <p class="mt-3 text-sm leading-relaxed text-gray-400 max-w-xs">
+              Un site moderne, rapide et accessible. Conçu mobile-first avec une attention particulière au détail.
+            </p>
+          </div>
+
+          <!-- Navigation -->
+          <nav aria-label="Navigation du footer">
+            <h3 class="text-white font-semibold text-sm uppercase tracking-wider mb-4">Navigation</h3>
+            <ul class="space-y-2.5">
+              <li><a href="#/" class="text-sm hover:text-indigo-400 transition-colors">Accueil</a></li>
+              <li><a href="#/a-propos" class="text-sm hover:text-indigo-400 transition-colors">À propos</a></li>
+              <li><a href="#/services" class="text-sm hover:text-indigo-400 transition-colors">Services</a></li>
+              <li><a href="#/contact" class="text-sm hover:text-indigo-400 transition-colors">Contact</a></li>
+            </ul>
+          </nav>
+
+          <!-- Légal -->
+          <nav aria-label="Informations légales">
+            <h3 class="text-white font-semibold text-sm uppercase tracking-wider mb-4">Légal</h3>
+            <ul class="space-y-2.5">
+              <li><a href="#" class="text-sm hover:text-indigo-400 transition-colors">Mentions légales</a></li>
+              <li><a href="#" class="text-sm hover:text-indigo-400 transition-colors">Politique de confidentialité</a></li>
+              <li><a href="#" class="text-sm hover:text-indigo-400 transition-colors">CGU</a></li>
+            </ul>
+          </nav>
+
+          <!-- Contact -->
+          <address class="not-italic">
+            <h3 class="text-white font-semibold text-sm uppercase tracking-wider mb-4">Contact</h3>
+            <ul class="space-y-2.5 text-sm">
+              <li><a href="mailto:contact@monsite.fr" class="hover:text-indigo-400 transition-colors">contact@monsite.fr</a></li>
+              <li><a href="tel:+33100000000" class="hover:text-indigo-400 transition-colors">01 00 00 00 00</a></li>
+              <li class="text-gray-400">Paris, France</li>
+            </ul>
+          </address>
+        </div>
+
+        <!-- Copyright -->
+        <div class="border-t border-gray-800 py-6 flex flex-col sm:flex-row items-center justify-between gap-3 text-xs text-gray-500">
+          <p>&copy; <span id="copyright-year">2026</span> MonSite. Tous droits réservés.</p>
+          <p>Fait avec <span class="text-red-400" aria-label="amour">&#9829;</span> en France</p>
+        </div>
+      </div>
+    </footer>
   </div>
 
   <!-- ═══════════════════════════════════════════

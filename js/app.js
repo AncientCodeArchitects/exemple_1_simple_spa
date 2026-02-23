@@ -1,11 +1,9 @@
 /**
  * App.js — Point d'entrée de la SPA
- * Initialise le shell (header/footer), enregistre les routes HTML, lance le router.
+ * Enregistre les routes HTML, lance le router, gère le header (burger + liens actifs).
  */
 
 import Router from './router.js';
-import { renderHeader, initHeader } from './components/header.js';
-import { renderFooter } from './components/footer.js';
 
 // ── Routes : path → fichier HTML + meta SEO ──
 const ROUTES = {
@@ -25,14 +23,66 @@ function updateMeta(path) {
   document.querySelector('meta[name="twitter:description"]')?.setAttribute('content', route.description);
 }
 
+/** Initialise le burger menu et l'état actif des liens */
+function initHeader() {
+  const btn = document.getElementById('burger-btn');
+  const menu = document.getElementById('mobile-menu');
+  if (!btn || !menu) return;
+
+  const toggle = (forceClose = false) => {
+    const isOpen = btn.getAttribute('aria-expanded') === 'true';
+    const shouldClose = forceClose || isOpen;
+
+    btn.setAttribute('aria-expanded', String(!shouldClose));
+    menu.setAttribute('aria-hidden', String(shouldClose));
+
+    if (shouldClose) {
+      menu.classList.add('invisible', 'opacity-0');
+      menu.querySelector('.mobile-menu-panel')?.classList.add('translate-y-[-8px]');
+      document.body.classList.remove('overflow-hidden');
+    } else {
+      menu.classList.remove('invisible', 'opacity-0');
+      menu.querySelector('.mobile-menu-panel')?.classList.remove('translate-y-[-8px]');
+      document.body.classList.add('overflow-hidden');
+    }
+  };
+
+  btn.addEventListener('click', () => toggle());
+  menu.querySelector('.mobile-menu-backdrop')?.addEventListener('click', () => toggle(true));
+  menu.querySelectorAll('.mobile-nav-link').forEach((link) => {
+    link.addEventListener('click', () => toggle(true));
+  });
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape' && btn.getAttribute('aria-expanded') === 'true') {
+      toggle(true);
+      btn.focus();
+    }
+  });
+
+  const updateActiveLink = (path) => {
+    document.querySelectorAll('[data-path]').forEach((link) => {
+      const isActive = link.dataset.path === path;
+      link.classList.toggle('text-indigo-600', isActive);
+      link.classList.toggle('bg-indigo-50', isActive);
+      link.classList.toggle('text-gray-600', !isActive && link.classList.contains('nav-link'));
+      link.classList.toggle('text-gray-700', !isActive && link.classList.contains('mobile-nav-link'));
+      if (isActive) link.setAttribute('aria-current', 'page');
+      else link.removeAttribute('aria-current');
+    });
+  };
+
+  window.addEventListener('route-changed', (e) => updateActiveLink(e.detail.path));
+  updateActiveLink(window.location.hash.slice(1) || '/');
+}
+
 // ── Initialisation ──
 function init() {
-  // 1. Injecter le shell (header + footer)
-  document.getElementById('app-header').innerHTML = renderHeader();
-  document.getElementById('app-footer').innerHTML = renderFooter();
-
-  // 2. Initialiser le header (burger, liens actifs)
+  // 1. Initialiser le header (burger, liens actifs)
   initHeader();
+
+  // 2. Année du copyright dynamique
+  const yearEl = document.getElementById('copyright-year');
+  if (yearEl) yearEl.textContent = new Date().getFullYear();
 
   // 3. Enregistrer les routes → fichiers HTML
   for (const [path, route] of Object.entries(ROUTES)) {
