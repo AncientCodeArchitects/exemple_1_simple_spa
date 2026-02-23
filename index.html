@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="fr" class="scroll-smooth">
+<head>
+  <!-- ═══════════════════════════════════════════
+       META — Basiques
+  ═══════════════════════════════════════════ -->
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+
+  <!-- ═══════════════════════════════════════════
+       SEO — Titre, description, robots
+  ═══════════════════════════════════════════ -->
+  <title>MonSite — Template SPA moderne</title>
+  <meta name="description" content="Template SPA moderne, mobile-first, accessible et optimisé SEO. Construit avec Tailwind CSS et JavaScript vanilla.">
+  <meta name="keywords" content="template, SPA, tailwind, responsive, mobile-first, accessible, SEO">
+  <meta name="author" content="MonSite">
+  <meta name="robots" content="index, follow">
+  <link rel="canonical" href="https://www.monsite.fr/">
+
+  <!-- ═══════════════════════════════════════════
+       Open Graph (Facebook, LinkedIn…)
+  ═══════════════════════════════════════════ -->
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="MonSite — Template SPA moderne">
+  <meta property="og:description" content="Template SPA moderne, mobile-first, accessible et optimisé SEO.">
+  <meta property="og:url" content="https://www.monsite.fr/">
+  <meta property="og:site_name" content="MonSite">
+  <meta property="og:locale" content="fr_FR">
+  <!-- <meta property="og:image" content="https://www.monsite.fr/img/og-image.jpg"> -->
+
+  <!-- ═══════════════════════════════════════════
+       Twitter Card
+  ═══════════════════════════════════════════ -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="MonSite — Template SPA moderne">
+  <meta name="twitter:description" content="Template SPA moderne, mobile-first, accessible et optimisé SEO.">
+  <!-- <meta name="twitter:image" content="https://www.monsite.fr/img/twitter-card.jpg"> -->
+
+  <!-- ═══════════════════════════════════════════
+       Données structurées JSON-LD
+  ═══════════════════════════════════════════ -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "WebSite",
+    "name": "MonSite",
+    "url": "https://www.monsite.fr/",
+    "description": "Template SPA moderne, mobile-first, accessible et optimisé SEO.",
+    "publisher": {
+      "@type": "Organization",
+      "name": "MonSite",
+      "url": "https://www.monsite.fr/"
+    }
+  }
+  </script>
+
+  <!-- ═══════════════════════════════════════════
+       Favicon
+  ═══════════════════════════════════════════ -->
+  <!-- Décommente et ajoute tes fichiers favicon -->
+  <!-- <link rel="icon" type="image/svg+xml" href="/img/favicon.svg"> -->
+  <!-- <link rel="apple-touch-icon" sizes="180x180" href="/img/apple-touch-icon.png"> -->
+
+  <!-- ═══════════════════════════════════════════
+       Fonts — Inter via Google Fonts
+       Bonne lisibilité mobile + desktop
+  ═══════════════════════════════════════════ -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap">
+
+  <!-- ═══════════════════════════════════════════
+       Tailwind CSS (CDN — Play CDN pour dev)
+       En prod, utiliser le build CLI/PostCSS
+  ═══════════════════════════════════════════ -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: {
+            sans: ['Inter', 'system-ui', '-apple-system', 'sans-serif'],
+          },
+        },
+      },
+    };
+  </script>
+
+  <!-- ═══════════════════════════════════════════
+       Styles custom
+  ═══════════════════════════════════════════ -->
+  <link rel="stylesheet" href="css/style.css">
+</head>
+
+<body class="font-sans text-gray-900 antialiased bg-white min-h-screen flex flex-col">
+
+  <!-- Skip to content — accessibilité -->
+  <a href="#main-content"
+     class="sr-only focus:not-sr-only focus:fixed focus:top-2 focus:left-2 focus:z-[100] focus:px-4 focus:py-2 focus:bg-indigo-600 focus:text-white focus:rounded-lg focus:text-sm focus:font-medium">
+    Aller au contenu principal
+  </a>
+
+  <!-- ═══ SHELL SPA — Header / Content / Footer ═══ -->
+  <div id="app" class="flex flex-col min-h-screen">
+    <!-- Header injecté par JS -->
+    <div id="app-header"></div>
+
+    <!-- Contenu principal — outlet du router -->
+    <div id="app-content" class="flex-1" role="main">
+      <!-- Chargement initial -->
+      <div class="flex items-center justify-center min-h-[60vh]">
+        <div class="animate-pulse text-gray-400 text-lg">Chargement…</div>
+      </div>
+    </div>
+
+    <!-- Footer injecté par JS -->
+    <div id="app-footer"></div>
+  </div>
+
+  <!-- ═══════════════════════════════════════════
+       App JS — Module ES
+  ═══════════════════════════════════════════ -->
+  <script type="module" src="js/app.js"></script>
+</body>
+</html>

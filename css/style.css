@@ -1,0 +1,114 @@
+/* ═══════════════════════════════════════════
+   Styles custom — complément Tailwind
+   ═══════════════════════════════════════════ */
+
+/* ── Transitions de page ── */
+#app-content {
+  animation: fadeIn 0.25s ease-out;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(6px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* ── Burger animation — open state ── */
+button[aria-expanded="true"] .burger-line:nth-child(1) {
+  transform: translateY(9px) rotate(45deg);
+}
+button[aria-expanded="true"] .burger-line:nth-child(2) {
+  opacity: 0;
+  transform: scaleX(0);
+}
+button[aria-expanded="true"] .burger-line:nth-child(3) {
+  transform: translateY(-9px) rotate(-45deg);
+}
+
+/* ── Mobile menu open state ── */
+.mobile-menu:not(.invisible) .mobile-menu-panel {
+  transform: translateY(0);
+}
+
+/* ── Focus visible global ── */
+:focus-visible {
+  outline: 2px solid #6366f1;
+  outline-offset: 2px;
+  border-radius: 4px;
+}
+
+/* ── Scrollbar subtile (Webkit) ── */
+::-webkit-scrollbar {
+  width: 8px;
+}
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+::-webkit-scrollbar-thumb {
+  background: #d1d5db;
+  border-radius: 4px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #9ca3af;
+}
+
+/* ── Typographie mobile améliorée ── */
+@media (max-width: 639px) {
+  /* Taille de base lisible sur mobile */
+  body {
+    font-size: 16px;
+    -webkit-text-size-adjust: 100%;
+    text-size-adjust: 100%;
+  }
+
+  /* Inputs jamais en-dessous de 16px pour éviter le zoom iOS */
+  input, select, textarea {
+    font-size: 16px;
+  }
+
+  /* Tap targets confortables */
+  a, button {
+    min-height: 44px;
+    min-width: 44px;
+  }
+}
+
+/* ── Smooth transitions sur le contenu ── */
+.nav-link,
+.mobile-nav-link {
+  position: relative;
+}
+
+.nav-link::after {
+  content: '';
+  position: absolute;
+  bottom: 4px;
+  left: 12px;
+  right: 12px;
+  height: 2px;
+  background: #6366f1;
+  border-radius: 1px;
+  transform: scaleX(0);
+  transition: transform 0.2s ease;
+}
+
+.nav-link[aria-current="page"]::after,
+.nav-link:hover::after {
+  transform: scaleX(1);
+}
+
+/* ── Print styles ── */
+@media print {
+  header, footer, #burger-btn, .mobile-menu {
+    display: none !important;
+  }
+  body {
+    font-size: 12pt;
+    color: #000;
+  }
+}
